@@ -68,6 +68,62 @@ haproxy_defaults:
         file: /etc/haproxy/errors/504.http
 
 haproxy_backends: []
-haproxy_frontends: []
+
+haproxy_frontends:
+  - name:
+    ip:
+    bind:
+      - 192.168.1.1:80
+      - 192.168.1.2:81
+    ssl:
+      cert: /etc/ssl/private/cert.pem
+      ciphers: 'RC4-SHA:AES128-SHA:AES:!ADH:!aNULL:!DH:!EDH:!eNULL'
+    maxconn:
+    monitor:
+      uri:
+      fail:
+        - <condition>
+    condition:
+      -
+    acl:
+      - name:
+        condition:
+    http_request:
+      - action:
+        param:
+        condition:
+    http_response:
+      - action:
+        param:
+        condition:
+    rate_limit_sessions:
+    block:
+        -
+    options:
+        - forwardfor
+    default_backend:
+    use_backend:
+      - name:
+        condition:
+    timeout:
+      - param:
+        value:
+    reqadd:
+      - "X-RequestHeader1:\\ some-value"
+      - "X-RequestHeader2:\\ some-value"
+    rspadd:
+      - "X-ResponseHeader1:\\ some-value"
+      - "X-ResponseHeader2:\\ some-value"
+    reqrep:
+      - "^Host:\ www.(.*)$ Host:\ \1 if host_www"
+    reqirep:
+      - "^Host:\ www.(.*)$ Host:\ \1 if host_www"
+    rsprep:
+      - "^Location:\ 127.0.0.1:8080 Location:\ www.mydomain.com"
+    rspirep:
+      - "^Location:\ 127.0.0.1:8080 Location:\ www.mydomain.com"
+
+
+
 haproxy_listen: []
 haproxy_userlists: []
