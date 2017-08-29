@@ -115,9 +115,9 @@ haproxy_frontends:
       - "X-ResponseHeader1:\\ some-value"
       - "X-ResponseHeader2:\\ some-value"
     reqrep:
-      - "^Host:\ www.(.*)$ Host:\ \1 if host_www"
+      - "^Host:\ www.(.*)$ Host:\\1 if host_www"
     reqirep:
-      - "^Host:\ www.(.*)$ Host:\ \1 if host_www"
+      - "^Host:\ www.(.*)$ Host:\\1 if host_www"
     rsprep:
       - "^Location:\ 127.0.0.1:8080 Location:\ www.mydomain.com"
     rspirep:
